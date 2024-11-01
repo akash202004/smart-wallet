@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "user-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,13 +12,15 @@
     "@repo/db": "*",
     "@repo/store": "*",
     "@repo/ui": "*",
+    "bcrypt": "^5.1.1",
     "next": "14.2.6",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
