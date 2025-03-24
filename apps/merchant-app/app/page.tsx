@@ -1,5 +1,6 @@
 "use client";
 
+<<<<<<< HEAD
 // import { useBalance } from "@repo/store/balance";
 
 export default function () {
@@ -11,3 +12,13 @@ export default function () {
     </div>
   );
 }
+=======
+import { useBalance } from "@repo/store/balance";
+
+export default function() {
+  const balance = useBalance();
+  return <div>
+    hi there {balance}
+  </div>
+}
+>>>>>>> fffa302 (re-intilizing the repo)

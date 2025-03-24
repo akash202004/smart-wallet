@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "dist"
@@ -6,3 +7,13 @@
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
+=======
+    "extends": "@repo/typescript-config/react-library.json",
+    "compilerOptions": {
+      "outDir": "dist"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+  }
+  
+>>>>>>> fffa302 (re-intilizing the repo)

@@ -15,4 +15,8 @@
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fffa302 (re-intilizing the repo)

@@ -8,7 +8,11 @@ module.exports = {
     "eslint:recommended",
     "prettier",
     require.resolve("@vercel/style-guide/eslint/next"),
+<<<<<<< HEAD
     "turbo",
+=======
+    "eslint-config-turbo",
+>>>>>>> fffa302 (re-intilizing the repo)
   ],
   globals: {
     React: true,

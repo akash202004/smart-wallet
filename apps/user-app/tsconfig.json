@@ -9,7 +9,11 @@
   },
   "include": [
     "next-env.d.ts",
+<<<<<<< HEAD
     "next.config.mjs",
+=======
+    "next.config.js",
+>>>>>>> fffa302 (re-intilizing the repo)
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"

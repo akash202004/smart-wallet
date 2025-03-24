@@ -16,7 +16,11 @@ export function Card({
       rel="noopener noreferrer"
       target="_blank"
     >
+<<<<<<< HEAD
       <h2>
+=======
+      <h2 className="text-sm">
+>>>>>>> fffa302 (re-intilizing the repo)
         {title} <span>-&gt;</span>
       </h2>
       <p>{children}</p>

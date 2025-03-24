@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "@repo/db",
   "version": "1.0.0",
   "description": "",
@@ -16,4 +17,17 @@
   "exports": {
     "./client": "./index.ts"
   }
+=======
+    "name": "@repo/db",
+    "version": "0.0.0",
+    "dependencies": {
+        "@prisma/client": "^5.11.0"
+    },
+    "devDependencies": {
+        "prisma": "5.11.0"
+    },
+    "exports": {
+        "./client": "./index.ts"
+    }
+>>>>>>> fffa302 (re-intilizing the repo)
 }

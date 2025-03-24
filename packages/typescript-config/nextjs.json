@@ -1,5 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
+<<<<<<< HEAD
+=======
+  "display": "Next.js",
+>>>>>>> fffa302 (re-intilizing the repo)
   "extends": "./base.json",
   "compilerOptions": {
     "plugins": [{ "name": "next" }],

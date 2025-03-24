@@ -5,7 +5,12 @@
   "exports": {
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
+<<<<<<< HEAD
     "./code": "./src/code.tsx"
+=======
+    "./code": "./src/code.tsx",
+    "./appbar": "./src/Appbar.tsx"
+>>>>>>> fffa302 (re-intilizing the repo)
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -20,9 +25,14 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "eslint": "^8.57.0",
+<<<<<<< HEAD
     "typescript": "5.5.4"
   },
   "dependencies": {
     "react": "^18.2.0"
+=======
+    "react": "^18.2.0",
+    "typescript": "^5.3.3"
+>>>>>>> fffa302 (re-intilizing the repo)
   }
 }

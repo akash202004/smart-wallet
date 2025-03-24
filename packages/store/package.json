@@ -8,4 +8,8 @@
   "exports": {
     "./balance": "./src/hooks/useBalance"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fffa302 (re-intilizing the repo)

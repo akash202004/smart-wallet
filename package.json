@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "smart-wallet",
+=======
+  "name": "week-18",
+>>>>>>> fffa302 (re-intilizing the repo)
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -8,13 +12,21 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+<<<<<<< HEAD
     "prettier": "^3.2.5",
     "turbo": "^2.2.3",
     "typescript": "5.5.4"
+=======
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "prettier": "^3.2.5",
+    "turbo": "latest"
+>>>>>>> fffa302 (re-intilizing the repo)
   },
   "engines": {
     "node": ">=18"
   },
+<<<<<<< HEAD
   "packageManager": "npm@9.8.0",
   "workspaces": [
     "apps/*",
@@ -24,4 +36,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
+=======
+  "packageManager": "npm@10.2.4",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+>>>>>>> fffa302 (re-intilizing the repo)
 }

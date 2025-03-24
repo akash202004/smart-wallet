@@ -5,4 +5,8 @@
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fffa302 (re-intilizing the repo)
