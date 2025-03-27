@@ -1,5 +1,5 @@
 {
-  "name": "@smart-wallet/db",
+  "name": "@smart-wallet/store",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^6.5.0",
-    "prisma": "^6.5.0"
+    "recoil": "^0.7.7"
   },
   "exports": {
-    "./clinet": "./src/index.ts"
+    "./useBalance": "./src/hooks/useBalance"
   }
 }
