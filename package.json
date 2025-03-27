@@ -1,5 +1,5 @@
 {
-  "name": "paytm-project-starter-monorepo-migration",
+  "name": "smart-wallet",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -9,6 +9,8 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
     "prettier": "^3.5.3",
     "turbo": "^2.4.4",
     "typescript": "5.8.2"
