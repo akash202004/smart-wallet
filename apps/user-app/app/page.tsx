@@ -1,6 +1,6 @@
 "use client"
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Appbar } from "@repo/ui/appbar";
+import { Appbar } from "@smart-wallet/ui/Appbar";
 import { JSX } from "react";
 
 export default function Page(): JSX.Element {

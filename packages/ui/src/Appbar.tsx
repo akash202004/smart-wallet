@@ -1,3 +1,5 @@
+"use clinet"
+
 import { Button } from "./button";
 
 interface AppbarProps {
