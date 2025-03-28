@@ -12,4 +12,4 @@ class prismaSingleton {
   }
 }
 
-export default prismaSingleton.getInstance();
+export const prismaClient = prismaSingleton.getInstance();
