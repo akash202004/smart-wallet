@@ -1,19 +1,13 @@
 {
-  "name": "@smart-wallet/db",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@prisma/client": "^6.5.0",
-    "prisma": "^6.5.0"
-  },
-  "exports": {
-    "./client": "./src/index.ts"
-  }
+    "name": "@repo/db",
+    "version": "0.0.0",
+    "dependencies": {
+        "@prisma/client": "^5.11.0"
+    },
+    "devDependencies": {
+        "prisma": "5.11.0"
+    },
+    "exports": {
+        "./client": "./index.ts"
+    }
 }
