@@ -8,7 +8,7 @@ export const Sidebar = ({
   setActivePages: (page: string) => void;
 }) => {
   return (
-    <div className="h-screen w-64 bg-black fixed text-white py-8 px-4 border-r">
+    <div className="fixed md:relative z-40 h-full w-64 bg-black text-white py-8 px-4 border-r transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
       <ul className="space-y-6">
         <li>
           <button

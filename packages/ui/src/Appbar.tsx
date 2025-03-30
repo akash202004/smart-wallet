@@ -4,18 +4,17 @@ interface AppbarProps {
   user?: {
     name?: string | null;
   };
-  // TODO: can u figure out what the type should be here?
-  onSignin: any;
-  onSignout: any;
+  onSignin: () => void;
+  onSignout: () => void;
 }
 
 export const Appbar = ({ user, onSignin, onSignout }: AppbarProps) => {
   return (
-    <div className="flex justify-between border-b px-4 bg-black">
-      <div className="text-lg text-bold text-white flex flex-col justify-center">
+    <div className="fixed w-full flex justify-between border-b px-4 bg-black z-50">
+      <div className="text-lg font-bold text-white flex items-center">
         Smart-Wallet
       </div>
-      <div className="flex flex-col justify-center pt-2">
+      <div className="flex items-center py-2">
         <Button onClick={user ? onSignout : onSignin}>
           {user ? "Logout" : "Login"}
         </Button>
