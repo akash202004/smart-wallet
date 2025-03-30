@@ -1,0 +1,49 @@
+import { HistoryIcon, Home, Send } from "lucide-react";
+
+export const Sidebar = ({
+  activePage,
+  setActivePages,
+}: {
+  activePage: string;
+  setActivePages: (page: string) => void;
+}) => {
+  return (
+    <div className="h-screen w-64 bg-black fixed text-white py-8 px-4 border-r">
+      <ul className="space-y-6">
+        <li>
+          <button
+            onClick={() => setActivePages("home")}
+            className={`flex items-center gap-2 w-full px-4 py-2 rounded-md ${
+              activePage === "home" ? "bg-gray-600 text-white" : "hover:text-gray-200"
+            }`}
+          >
+            <Home size={24} />
+            <span>Home</span>
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => setActivePages("transfer")}
+            className={`flex items-center gap-2 w-full px-4 py-2 rounded-md ${
+              activePage === "transfer" ? "bg-gray-700 text-white" : "hover:text-gray-200"
+            }`}
+          >
+            <Send size={24} />
+            <span>Transfer</span>
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => setActivePages("transaction")}
+            className={`flex items-center gap-2 w-full px-4 py-2 rounded-md ${
+              activePage === "transaction" ? "bg-gray-700 text-white" : "hover:text-gray-200"
+            }`}
+          >
+            <HistoryIcon size={24} />
+            <span>Transaction</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
+};
