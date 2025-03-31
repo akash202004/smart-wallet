@@ -12,7 +12,7 @@ export default function Page(): JSX.Element {
   const [activePage, setActivePage] = useState("home");
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-black ">
       <Appbar onSignin={signIn} onSignout={signOut} user={session.data?.user} />
       <div className="flex flex-1">
         <Sidebar setActivePages={setActivePage} activePage={activePage} />

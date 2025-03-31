@@ -1,6 +1,6 @@
 export const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center p-4 md:p-8">
+    <div className="flex flex-col items-center justify-center p-4 mt-10 bg-black  md:p-8">
       <div className="bg-white shadow-md rounded-2xl p-4 md:p-6 w-full max-w-3xl">
         <h1 className="text-xl md:text-2xl font-semibold text-gray-800">Good Afternoon, User</h1>
         <p className="text-gray-500 mt-2">Your portfolio value</p>
