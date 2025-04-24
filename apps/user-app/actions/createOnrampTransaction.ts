@@ -54,3 +54,21 @@ export async function getOnrampTransactions() {
     transactions,
   };
 }
+
+export async function getUserBalance(){
+  const session = await getServerSession(authOptions);  
+  const userId = Number(session?.user?.id);
+  if (!userId) {
+    return {
+      message: "Not authenticated",
+    };
+  }
+  const user = await prisma.balance.findUnique({
+    where: {
+      userId: userId,
+    },
+  });
+  return {
+    user,
+  };
+}
