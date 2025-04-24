@@ -10,7 +10,9 @@
     "./sidebar": "./src/Sidebar.tsx",
     "./home": "./src/Home.tsx",
     "./transaction": "./src/Transaction.tsx",
-    "./transfer": "./src/Transfer.tsx"
+    "./transfer": "./src/Transfer.tsx",
+    "./select": "./src/Select.tsx",
+    "./text-input": "./src/TextInput.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

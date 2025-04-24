@@ -4,7 +4,7 @@ import { Appbar } from "@repo/ui/appbar";
 import { Sidebar } from "@repo/ui/sidebar";
 import { Home } from "@repo/ui/home";
 import { Transaction } from "@repo/ui/transaction";
-import { Transfer } from "@repo/ui/transfer";
+import { Transfer } from "./components/Transfer"
 import { useState } from "react";
 
 export default function Page(): JSX.Element {
