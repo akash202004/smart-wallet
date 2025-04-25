@@ -30,9 +30,13 @@ export async function createOnrampTransaction({
       status : "Processing"
     },
   });
-  console.log({ userId, amount, provider, token });
   return {
     message: "Onramp transaction created",
+    data: {
+      userId,
+      token,
+      amount
+    }
   };
 }
 

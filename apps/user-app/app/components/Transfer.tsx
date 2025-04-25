@@ -8,7 +8,8 @@ import {
   createOnrampTransaction,
   getOnrampTransactions,
 } from "../../actions/createOnrampTransaction";
-import { getUserBalance } from "../../actions/userActions"
+import { getUserBalance } from "../../actions/userActions";
+import axios from "axios";
 
 const SUPPORTED_BANKS = [
   {
@@ -33,7 +34,9 @@ type OnrampResult = {
   message?: string;
 };
 
-type BalanceResult = {
+type addBalanceProps = {
+  userId: number;
+  token: string;
   amount: number;
 };
 
@@ -42,12 +45,24 @@ export const Transfer = () => {
     SUPPORTED_BANKS[0]?.redirectUrl
   );
   const [amount, setAmount] = useState<number>(0);
-  const [provider, setProvider] = useState<string>(
-    SUPPORTED_BANKS[0]?.name || ""
-  );
+  const [provider, setProvider] = useState<string>(SUPPORTED_BANKS[0]?.name || "");
   const [transactions, setTransactions] = useState<Transaction[] | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Changed from true to false initially
   const [balance, setBalance] = useState<number>(0);
+
+  function returnToOrigin() {
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+  }
+
+  const addBalance = async ({ userId, token, amount }: addBalanceProps) => {
+    await axios.post("http://localhost:5000/hdfcwebhook", {
+      userId,
+      token,
+      amount,
+    });
+  };
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -99,18 +114,37 @@ export const Transfer = () => {
             <div className="flex justify-center pt-4">
               <Button
                 onClick={async () => {
+                  setLoading(true); // Start loading when the button is clicked
                   try {
-                    await createOnrampTransaction({
+                    const res = await createOnrampTransaction({
                       amount,
                       provider,
                     });
-                    window.location.href = redirectUrl || "";
+
+                    const userId = res?.data?.userId;
+                    const token = res?.data?.token;
+
+                    if (userId !== undefined && token !== undefined) {
+                      await addBalance({
+                        userId,
+                        token,
+                        amount,
+                      });
+
+                      window.location.href = redirectUrl || "";
+                      returnToOrigin();
+                    } else {
+                      console.error("userId or token is undefined");
+                    }
                   } catch (err) {
                     console.error("Failed to create transaction:", err);
+                  } finally {
+                    setLoading(false); // Stop loading when the call finishes
                   }
                 }}
+                disabled={loading} // Disable the button while loading
               >
-                Add Money
+                {loading ? "Processing..." : "Add Money"}
               </Button>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import express from "express";
 import { z } from "zod";
 import db from "@repo/db/client";
+const cors = require("cors");
 
 const app = express();
 
@@ -55,6 +56,8 @@ app.post("/hdfcWebhook", async (req, res) => {
     return;
   }
 });
+
+app.use(cors());
 
 app.listen(5000, () => {
   console.log("Server started on port 5000");
