@@ -1,6 +1,7 @@
 import db from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
+import { createUserBalance } from "../../actions/userActions";
 
 export const authOptions = {
     providers: [
@@ -41,6 +42,7 @@ export const authOptions = {
                         password: hashedPassword
                     }
                 });
+                await createUserBalance(user?.id);
             
                 return {
                     id: user.id.toString(),

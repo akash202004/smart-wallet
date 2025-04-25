@@ -7,8 +7,8 @@ import { TextInput } from "@repo/ui/text-input";
 import {
   createOnrampTransaction,
   getOnrampTransactions,
-  getUserBalance,
 } from "../../actions/createOnrampTransaction";
+import { getUserBalance } from "../../actions/userActions"
 
 const SUPPORTED_BANKS = [
   {

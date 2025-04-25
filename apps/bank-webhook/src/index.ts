@@ -6,9 +6,11 @@ const app = express();
 
 const paymentInformation = z.object({
   token: z.string(),
-  user_identifier: z.number(),
+  userId: z.number(),
   amount: z.number().positive("Amount must be positive"),
 });
+
+app.use(express.json());
 
 app.post("/hdfcWebhook", async (req, res) => {
   try {
@@ -16,7 +18,7 @@ app.post("/hdfcWebhook", async (req, res) => {
     const validatedData = paymentInformation.parse(req.body);
     const paymentInformationSchema = {
       token: validatedData.token,
-      userId: validatedData.user_identifier,
+      userId: validatedData.userId,
       amount: validatedData.amount,
     };
     // Update balance in db, add txn ✅
