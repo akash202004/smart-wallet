@@ -5,84 +5,94 @@ import { authOptions } from "../app/lib/auth";
 import prisma from "@repo/db/client";
 
 interface GetP2PProps {
-  to: number;
+  to: string;
   amount: number;
 }
 
 export async function getP2P({ to, amount }: GetP2PProps) {
   const session = await getServerSession(authOptions);
-  const userId = Number(session?.user?.id);
-  if (!userId) {
-    return {
-      message: "Not authenticated",
-    };
+  const fromUserId = Number(session?.user?.id);
+
+  if (!fromUserId) {
+    return { message: "Not authenticated" };
   }
-  const from = await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
+
+  const fromUser = await prisma.user.findUnique({
+    where: { id: fromUserId },
   });
-  if (!from) {
-    return {
-      message: "User not found",
-    };
+
+  if (!fromUser) {
+    return { message: "Sender not found" };
   }
+
   const toUser = await prisma.user.findUnique({
-    where: {
-      id: to,
-    },
+    where: { number: to },
   });
+
   if (!toUser) {
-    return {
-      message: "User not found",
-    };
+    return { message: "Receiver not found" };
   }
+
   await prisma.$transaction(async (tx) => {
-    await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(userId)} FOR UPDATE`
-    const checkBalance = await tx.balance.findUnique({
-      where: {
-        userId: userId,
-      },
+    await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${fromUserId} FOR UPDATE`;
+
+    const fromBalance = await tx.balance.findUnique({
+      where: { userId: fromUserId },
     });
-    if (!checkBalance) {
-      return {
-        message: "User not found",
-      };
+
+    if (!fromBalance) {
+      throw new Error("Sender balance not found");
     }
-    if (checkBalance.amount < amount) {
-      return {
-        message: "Insufficient funds",
-      };
+
+    if (fromBalance.amount < amount) {
+      throw new Error("Insufficient funds");
     }
+
     await tx.balance.update({
-      where: {
-        userId: userId,
-      },
+      where: { userId: fromUserId },
       data: {
         amount: {
           decrement: amount,
         },
       },
     });
+
     await tx.balance.update({
-      where: {
-        userId: to,
-      },
+      where: { userId: toUser.id },
       data: {
         amount: {
           increment: amount,
         },
       },
     });
-    await tx.p2pTransaction.create({
+
+    await tx.p2pTransfer.create({
       data: {
         amount: Number(amount),
-        fromUserId: Number(userId),
-        toUserId: Number(to)
+        fromUserId: fromUserId,
+        toUserId: toUser.id,
       },
     });
-    return {
-      message: "Success p2p Transaction",
-    };
   });
+
+  return { message: "Success p2p Transaction" };
+}
+
+export async function fetchP2P() {
+  const session = await getServerSession(authOptions);
+  const userId = Number(session?.user?.id);
+
+  if (!userId) {
+    return { message: "Not authenticated" };
+  }
+
+  const p2pTransfers = await prisma.p2pTransfer.findMany({
+    where: {
+      fromUserId: userId, 
+    }
+  })
+
+  return {
+    data : p2pTransfers
+  }
 }

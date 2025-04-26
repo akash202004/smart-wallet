@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HistoryIcon, Home, Send, Menu, X } from "lucide-react";
+import { HistoryIcon, Home, Send, Menu, X, Shuffle } from "lucide-react";
 
 export const Sidebar = ({ activePage, setActivePages }: any) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +58,19 @@ export const Sidebar = ({ activePage, setActivePages }: any) => {
             >
               <HistoryIcon size={24} />
               <span>Transaction</span>
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => setActivePages("p2ptransfer")}
+              className={`flex items-center gap-2 w-full px-4 py-2 rounded-md ${
+                activePage === "p2ptransfer"
+                  ? "bg-gray-700 text-white"
+                  : "hover:text-gray-200"
+              }`}
+            >
+              <Shuffle size={24} />
+              <span>p2p</span>
             </button>
           </li>
         </ul>

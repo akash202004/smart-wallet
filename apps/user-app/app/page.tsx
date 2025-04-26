@@ -5,6 +5,7 @@ import { Sidebar } from "@repo/ui/sidebar";
 import { Home } from "@repo/ui/home";
 import { Transaction } from "@repo/ui/transaction";
 import { Transfer } from "./components/Transfer"
+import { P2P } from "./components/P2P";
 import { useState } from "react";
 
 export default function Page(): JSX.Element {
@@ -20,6 +21,7 @@ export default function Page(): JSX.Element {
           {activePage === "home" && <Home />}
           {activePage === "transfer" && <Transfer />}
           {activePage === "transaction" && <Transaction />}
+          {activePage === "p2ptransfer" && <P2P />}
         </main>
       </div>
     </div>

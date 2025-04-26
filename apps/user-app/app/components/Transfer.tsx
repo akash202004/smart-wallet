@@ -84,10 +84,10 @@ export const Transfer = () => {
   }, []);
 
   return (
-    <div className="mt-20 flex flex-col">
+    <div className="mt-8 sm:mt-20 flex flex-col">
       <div>
         <Card title="Users Balance">
-          <div>Balance: ₹{balance / 100}</div>
+          <div>Balance: ₹{balance}</div>
         </Card>
       </div>
 
@@ -159,7 +159,7 @@ export const Transfer = () => {
             <div className="space-y-4">
               {transactions.map((x) => (
                 <div key={x.id} className="border-b pb-2">
-                  <div>Amount: ₹{x.amount / 100}</div>
+                  <div>Amount: ₹{x.amount}</div>
                   <div>Status: {x.status}</div>
                   <div>Time: {new Date(x.startTime).toLocaleString()}</div>
                 </div>
