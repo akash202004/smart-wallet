@@ -1,70 +1,68 @@
 import db from "@repo/db/client";
-import CredentialsProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials";
+import type { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
 import { createUserBalance } from "../../actions/userActions";
 
-export const authOptions = {
-    providers: [
-      CredentialsProvider({
-          name: 'Credentials',
-          credentials: {
-            phone: { label: "Phone number", type: "text", placeholder: "1231231231", required: true },
-            password: { label: "Password", type: "password", required: true },
-            name: {label: "Name", type: "text", required: true},
-            email: {label: "Email", type: "email", required: true}
-          },
-          // TODO: User credentials type from next-aut
-          async authorize(credentials: any) {
-            // Do zod validation, OTP validation here
-            const hashedPassword = await bcrypt.hash(credentials.password, 10);
-            const existingUser = await db.user.findFirst({
-                where: {
-                    number: credentials.phone
-                }
-            });
+export const authOptions: NextAuthOptions = {
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        phone: { label: "Phone number", type: "text", required: true },
+        password: { label: "Password", type: "password", required: true },
+        name: { label: "Name", type: "text", required: true },
+        email: { label: "Email", type: "email", required: true },
+      },
+      async authorize(credentials) {
+        if (!credentials) return null;
 
-            if (existingUser) {
-                const passwordValidation = await bcrypt.compare(credentials.password, existingUser.password);
-                if (passwordValidation) {
-                    return {
-                        id: existingUser.id.toString(),
-                        name: existingUser.name,
-                        email: existingUser.number
-                    }
-                }
-                return null;
-            }
+        const { phone, password } = credentials;
 
-            try {
-                const user = await db.user.create({
-                    data: {
-                        number: credentials.phone,
-                        password: hashedPassword
-                    }
-                });
-                await createUserBalance(user?.id);
-            
-                return {
-                    id: user.id.toString(),
-                    name: user.name,
-                    email: user.number
-                }
-            } catch(e) {
-                console.error(e);
-            }
+        const existingUser = await db.user.findFirst({
+          where: { number: phone },
+        });
 
-            return null
-          },
-        })
-    ],
-    secret: process.env.JWT_SECRET || "secret",
-    callbacks: {
-        // TODO: can u fix the type here? Using any is bad
-        async session({ token, session }: any) {
-            session.user.id = token.sub
+        if (existingUser) {
+          const isValid = await bcrypt.compare(password, existingUser.password);
+          if (!isValid) return null;
 
-            return session
+          return {
+            id: existingUser.id.toString(),
+            name: existingUser.name,
+            email: existingUser.number,
+          };
         }
-    }
-  }
-  
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        try {
+          const newUser = await db.user.create({
+            data: {
+              number: phone,
+              password: hashedPassword,
+              name: credentials.name,
+              email: credentials.email,
+            },
+          });
+
+          await createUserBalance(newUser.id);
+
+          return {
+            id: newUser.id.toString(),
+            name: newUser.name,
+            email: newUser.number,
+          };
+        } catch (e) {
+          console.error("User creation failed:", e);
+          return null;
+        }
+      },
+    }),
+  ],
+  secret: process.env.JWT_SECRET || "secret",
+  callbacks: {
+    async session({ session }) {
+      return session;
+    },
+  },
+};
