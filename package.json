@@ -6,7 +6,10 @@
     "dev": "turbo dev --parallel",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:generate": "cd packages/db && npx prisma generate & cd ../.."
+    "db:generate": "cd packages/db && npx prisma generate && cd ../..",
+    "build:user": "npm run db:generate && turbo run build --filter=apps/user-app",
+    "dev:user": "turbo run dev --filter=apps/user-app",
+    "start-user-app": "cd apps/user-app && npm run start"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
