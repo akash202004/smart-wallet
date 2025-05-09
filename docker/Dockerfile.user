@@ -1,18 +1,26 @@
 FROM node:20.12.0-alpine3.19
 
-WORKDIR /app/user-app
+# Set the working directory
+WORKDIR /app
 
+# Copy the root package.json and workspace configuration
 COPY package.json package-lock.json turbo.json tsconfig.json ./
 
+# Copy the entire apps and packages folders to the container
 COPY apps ./apps
 COPY packages ./packages
 
+# Install dependencies using npm (with legacy-peer-deps to handle any issues)
 RUN npm install --legacy-peer-deps
 
-# Can you add a script to the global package.json that does this? ✅
+# Run db:generate for Prisma
 RUN npm run db:generate
 
-# Can you filter the build down to just one app? ✅
-RUN npm run dev:user
+# Build only the user app (this ensures we're focusing only on the user app)
+RUN npm run build:user
 
+# Expose the port for the user app
+EXPOSE 3000
+
+# Start the user app
 CMD ["npm", "run", "start-user-app"]
