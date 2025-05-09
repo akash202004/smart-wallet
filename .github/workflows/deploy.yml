@@ -1,4 +1,5 @@
-name: Build and Deploy to dockerhub
+name: Build and Deploy to DockerHub
+
 on: 
   push:
     branches:
@@ -27,3 +28,15 @@ jobs:
 
       - name: Verify pushed image
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/smart-wallet:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKER_USERNAME }}/smart-wallet:latest
+            docker stop smart-wallet || true
+            docker rm smart-wallet || true
+            docker run -d --name smart-wallet -p 3005:3000 ${{ secrets.DOCKER_USERNAME }}/smart-wallet:latest
